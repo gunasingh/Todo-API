@@ -6,6 +6,7 @@ var sequelize = new Sequelize(undefined, undefined, undefined, {
 
 var Todo = sequelize.define('todo', {
 	description: {
+<<<<<<< HEAD
 		type: Sequelize.STRING,
 		allowNull: false,
 		validate: {
@@ -57,5 +58,24 @@ sequelize.sync({
 	}).catch(function (e) {
 		console.log(e);
 	});*/
+=======
+		type: Sequelize.STRING
+	},
+	completed: {
+		type: Sequelize.BOOLEAN
+	}
+});
+
+sequelize.sync().then(function() {
+	console.log('Everything is synced.');
+
+	Todo.create({
+		description: 'Watch game of thrones',
+		completed: false
+	}).then(function(todo) {
+		console.log('finished');
+		console.log(todo);
+	});
+>>>>>>> 14230ea8aa6f530992d0ab04c3acbce55d0aad0d
 });
 
