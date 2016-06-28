@@ -60,7 +60,7 @@ app.post('/todos', function(req, res) {
     // Accept only the required fields
     var body = _.pick(req.body, 'description', 'completed');
 
-    if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
+    /*if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.trim().length === 0) {
         // Bad data status
         return res.status(400).send();
     }
@@ -71,7 +71,12 @@ app.post('/todos', function(req, res) {
     body.id = todoNextId++;
     todos.push(body);
 
-    res.json(body);
+    res.json(body);*/
+    db.todo.create(body).then(function(todo) {
+        res.json(todo.toJSON());
+    }).catch(function (e) {
+        res.status(400).json(e);
+    });
 });
 
 // DELETE /todos/:id
